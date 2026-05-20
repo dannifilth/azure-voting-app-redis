@@ -1,0 +1,21 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-ingress-to-front-with-jwt
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: azure-vote-front
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        principals:
+        - "cluster.local/ns/istio-system/sa/istio-ingressgateway-service-account"
+        requestPrincipals:
+        - "lab@istio.local/*"
+    when:
+    - key: request.auth.claims[scope]
+      values:
+      - "vote:read"

@@ -1,0 +1,15 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-front-to-back
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: azure-vote-back
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        principals:
+        - "cluster.local/ns/default/sa/azure-vote-front-sa"

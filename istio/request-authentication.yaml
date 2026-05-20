@@ -1,0 +1,14 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: azure-vote-jwt
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: azure-vote-front
+  jwtRules:
+  - issuer: "lab@istio.local"
+    audiences:
+    - "azure-vote"
+    jwks: "{\"keys\": [{\"e\": \"AQAB\", \"kid\": \"lab-key-1\", \"kty\": \"RSA\", \"n\": \"uIzXGMn91WClDmI9GEvaeD-zSCK4L5zNTatMwVMTL7FWESp-p9FyRu1F1gwqb7jrbUTLb6-5cMBYM9rZJtlQa-tEzwSDS8c7NMOcESRx-gRY3nv64g5_hcQRwiOLb7TqCgjwkz52zu0mcgnKTsueVTm8Qx4xaZ7GiPKOQxQnz1WnDKkInEpjl_FUAhWV6qw43A-ARVzMx_ulJRULyiR7k11PbI4lSxkD2onE0GYzvr1hZlu77ifiovGoulCvnrjnrTa8O-jWIUCSxHXqKyttCm7vEUDOxdfRV2Hp1sqUx8_pPGZfaCkzJp9e5shWQn0eQi-1HOTKuX3s7t34y793Fw\"}]}"
